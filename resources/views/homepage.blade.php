@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Predictive Analysis - Academic Performance</title>
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
+@vite(['resources/css/app.css','resources/js/app.js'])
+
 <body class="bg-gray-100">
 
 <!-- Header Section -->
@@ -15,7 +16,7 @@
         <nav class="space-x-4">
             <a href="{{ url('/') }}" class="hover:text-gray-300">Home</a>
             <a href="{{ url('dashboard-analysis') }}" class="hover:text-gray-300">Dashboard</a>
-            <a href="{{ url('predictions') }}" class="hover:text-gray-300">Predictions</a>
+            <a href="{{ url('http://127.0.0.1:8000/') }}" class="hover:text-gray-300">Predictions</a>
             <a href="{{ url('reports')}}" class="hover:text-gray-300">Reports</a>
             <a href="{{ url('settings') }}" class="hover:text-gray-300">Settings</a>
         </nav>

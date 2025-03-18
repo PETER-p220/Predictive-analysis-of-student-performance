@@ -1,161 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - EduPredict</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Performance Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-50 font-sans">
 
-<!-- Main Content -->
-<div class="ml-6 p-6">
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto p-6">
 
     <!-- Header -->
-    <header class="flex justify-between items-center mb-6">
-        <div class="text-3xl font-semibold">Student Dashboard</div>
-        <div class="flex items-center space-x-4">
-            <span class="font-medium">Petram Future</span>
-            <img src="{{ asset('images\icons8-admin-48.png') }}" alt="profile" class="rounded-full">
-        </div>
+    <header class="text-center mb-12">
+      <h1 class="text-5xl font-bold text-gray-800">Predictive Analysis of Student Performance</h1>
+      <p class="text-xl text-gray-600 mt-4">Analyze and predict student academic performance across subjects using real-time data.</p>
     </header>
 
-    <!-- Academic Performance Overview -->
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-        <div class="bg-white p-6 rounded-lg shadow-lg">
-            <h2 class="text-xl font-semibold text-gray-800">Current Average</h2>
-            <p class="text-3xl font-bold text-blue-600 mt-2">68</p>
-            <p class="mt-2 text-sm text-gray-500">On Track</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-lg">
-            <h2 class="text-xl font-semibold text-gray-800">Predicted Final Exam Score</h2>
-            <p class="text-3xl font-bold text-blue-600 mt-2">85%</p>
-            <p class="mt-2 text-sm text-gray-500">Positive Trend</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-lg">
-            <h2 class="text-xl font-semibold text-gray-800">Needs Attention</h2>
-            <p class="text-3xl font-bold text-red-600 mt-2">Math: 60%</p>
-            <p class="mt-2 text-sm text-gray-500">Focus on improving grade</p>
-        </div>
+    <!-- Performance Trends Section -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-4">Subject Performance Trends</h2>
+      <div class="bg-white shadow-xl rounded-lg p-6">
+        <canvas id="performanceTrendChart"></canvas>
+      </div>
     </section>
 
-    <!-- Performance Trends and Predictions -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-        <!-- Performance Trends Chart -->
-        <div class="bg-white p-6 rounded-lg shadow-lg">
-            <h3 class="text-lg font-semibold text-gray-700 mb-4">Performance Trends</h3>
-            <canvas id="performanceChart" class="bg-gray-300 h-64 rounded-lg"></canvas>
-        </div>
-
-        <!-- Predicted Final Exam Score Chart -->
-        <div class="bg-white p-6 rounded-lg shadow-lg">
-            <h3 class="text-lg font-semibold text-gray-700 mb-4">Predicted Final Exam Score</h3>
-            <canvas id="predictionChart" class="bg-gray-300 h-64 rounded-lg"></canvas>
-        </div>
+    <!-- Real-Time Predictions Section -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-4">Real-Time Predictions</h2>
+      <div class="bg-white shadow-xl rounded-lg p-6">
+        <table class="w-full text-left">
+          <thead>
+            <tr>
+              <th class="border-b py-3 px-4 text-lg text-gray-600">Subject</th>
+              <th class="border-b py-3 px-4 text-lg text-gray-600">Predicted Score</th>
+              <th class="border-b py-3 px-4 text-lg text-gray-600">At Risk</th>
+            </tr>
+          </thead>
+          <tbody id="predictionTableBody">
+            <!-- Rows for Subjects -->
+            <tr>
+              <td class="border-b py-2 px-4">Physics</td>
+              <td class="border-b py-2 px-4" id="predictedPhysics">Loading...</td>
+              <td class="border-b py-2 px-4" id="atRiskPhysics">Loading...</td>
+            </tr>
+            <tr>
+              <td class="border-b py-2 px-4">Mathematics</td>
+              <td class="border-b py-2 px-4" id="predictedMath">Loading...</td>
+              <td class="border-b py-2 px-4" id="atRiskMath">Loading...</td>
+            </tr>
+            <tr>
+              <td class="border-b py-2 px-4">Chemistry</td>
+              <td class="border-b py-2 px-4" id="predictedChemistry">Loading...</td>
+              <td class="border-b py-2 px-4" id="atRiskChemistry">Loading...</td>
+            </tr>
+            <tr>
+              <td class="border-b py-2 px-4">Biology</td>
+              <td class="border-b py-2 px-4" id="predictedBiology">Loading...</td>
+              <td class="border-b py-2 px-4" id="atRiskBiology">Loading...</td>
+            </tr>
+            <!-- Additional subjects can be added similarly -->
+          </tbody>
+        </table>
+      </div>
     </section>
 
-    <!-- Upcoming Assignments Section -->
-    <section class="bg-white p-6 rounded-lg shadow-lg mb-8">
-        <h3 class="text-xl font-semibold text-gray-800 mb-4">Upcoming Assignments / Exams</h3>
-        <ul class="space-y-4">
-            <li class="flex justify-between items-center">
-                <div>
-                    <h4 class="text-lg font-medium">Math Midterm</h4>
-                    <p class="text-sm text-gray-500">Due: March 10, 2025</p>
-                </div>
-                <div class="text-blue-600">Upcoming</div>
-            </li>
-            <li class="flex justify-between items-center">
-                <div>
-                    <h4 class="text-lg font-medium">English Essay</h4>
-                    <p class="text-sm text-gray-500">Due: March 15, 2025</p>
-                </div>
-                <div class="text-blue-600">Upcoming</div>
-            </li>
-            <li class="flex justify-between items-center">
-                <div>
-                    <h4 class="text-lg font-medium">Science Quiz</h4>
-                    <p class="text-sm text-gray-500">Due: March 18, 2025</p>
-                </div>
-                <div class="text-blue-600">Upcoming</div>
-            </li>
-        </ul>
+    <!-- At-Risk Subjects Chart -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-4">At-Risk Subjects</h2>
+      <div class="bg-white shadow-xl rounded-lg p-6">
+        <canvas id="atRiskChart"></canvas>
+      </div>
     </section>
 
-    <!-- Actionable Insights / Recommendations -->
-    <section class="bg-white p-6 rounded-lg shadow-lg mb-8">
-        <h3 class="text-xl font-semibold text-gray-800 mb-4">Actionable Insights</h3>
-        <ul class="space-y-4">
-            <li class="flex justify-between items-center">
-                <div>
-                    <h4 class="text-lg font-medium">Math: Improve Score</h4>
-                    <p class="text-sm text-gray-500">Focus more on practice tests and revision.</p>
-                </div>
-                <div class="text-red-600">Needs Attention</div>
-            </li>
-            <li class="flex justify-between items-center">
-                <div>
-                    <h4 class="text-lg font-medium">English: Keep Up the Good Work</h4>
-                    <p class="text-sm text-gray-500">You are on track, keep it up!</p>
-                </div>
-                <div class="text-green-600">On Track</div>
-            </li>
-        </ul>
-    </section>
+  </div>
 
-</div>
+  <script>
+    // Dummy Prediction Data for Testing (You would get this from your API)
+    const subjectPredictions = {
+      physics: 45,
+      mathematics: 55,
+      chemistry: 48,
+      biology: 60
+    };
 
-<!-- Chart.js Script to Render Charts -->
-<script>
-    // Performance Trends Chart (Bar Chart)
-    const performanceCtx = document.getElementById('performanceChart').getContext('2d');
-    const performanceChart = new Chart(performanceCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Math', 'English', 'Science', 'History', 'Geography'],
-            datasets: [{
-                label: 'Performance Score',
-                data: [75, 50, 60, 80, 85], // Example scores
-                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+    // Function to fetch real-time predictions from the Flask backend (replace with real API call)
+    async function getPrediction(features) {
+      // Simulate a prediction based on features (for now we use hardcoded data)
+      return subjectPredictions;
+    }
 
-    // Predicted Final Exam Score Chart (Line Chart)
-    const predictionCtx = document.getElementById('predictionChart').getContext('2d');
-    const predictionChart = new Chart(predictionCtx, {
+    // Function to update the table and charts with predictions
+    async function updatePredictions() {
+      const features = [0.8, 0.6, 0.7, 0.75, 0.9]; // Example input features
+
+      // Simulate fetching predictions from backend
+      const predictions = await getPrediction(features);
+
+      // Update predicted scores in the table
+      document.getElementById('predictedPhysics').textContent = predictions.physics.toFixed(2);
+      document.getElementById('predictedMath').textContent = predictions.mathematics.toFixed(2);
+      document.getElementById('predictedChemistry').textContent = predictions.chemistry.toFixed(2);
+      document.getElementById('predictedBiology').textContent = predictions.biology.toFixed(2);
+
+      // Identify if the student is at risk based on predicted score (e.g., below 50%)
+      document.getElementById('atRiskPhysics').textContent = predictions.physics < 50 ? 'Yes' : 'No';
+      document.getElementById('atRiskMath').textContent = predictions.mathematics < 50 ? 'Yes' : 'No';
+      document.getElementById('atRiskChemistry').textContent = predictions.chemistry < 50 ? 'Yes' : 'No';
+      document.getElementById('atRiskBiology').textContent = predictions.biology < 50 ? 'Yes' : 'No';
+
+      // Update charts
+      updateCharts(predictions);
+    }
+
+    // Function to update the charts
+    function updateCharts(predictions) {
+      const subjectNames = ['Physics', 'Mathematics', 'Chemistry', 'Biology'];
+      const subjectScores = [
+        predictions.physics,
+        predictions.mathematics,
+        predictions.chemistry,
+        predictions.biology
+      ];
+
+      // Line chart for subject performance trends (Dummy example)
+      const performanceTrendChart = new Chart(document.getElementById('performanceTrendChart'), {
         type: 'line',
         data: {
-            labels: ['January', 'February', 'March', 'April', 'May'],
-            datasets: [{
-                label: 'Predicted Score',
-                data: [80, 82, 85, 87, 90], // Example predicted scores
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 2,
-                fill: true
-            }]
+          labels: ['2026', '2027', '2028'],
+          datasets: [
+            {
+              label: 'Physics',
+              data: [50, 55, predictions.physics],
+              borderColor: 'rgb(255, 99, 132)',
+              fill: false
+            },
+            {
+              label: 'Mathematics',
+              data: [60, 65, predictions.mathematics],
+              borderColor: 'rgb(54, 162, 235)',
+              fill: false
+            },
+            {
+              label: 'Chemistry',
+              data: [55, 60, predictions.chemistry],
+              borderColor: 'rgb(75, 192, 192)',
+              fill: false
+            },
+            {
+              label: 'Biology',
+              data: [70, 72, predictions.biology],
+              borderColor: 'rgb(153, 102, 255)',
+              fill: false
+            }
+          ]
+        }
+      });
+
+      // Bar chart for at-risk subjects
+      const atRiskChart = new Chart(document.getElementById('atRiskChart'), {
+        type: 'bar',
+        data: {
+          labels: subjectNames,
+          datasets: [{
+            label: 'Predicted Scores',
+            data: subjectScores,
+            backgroundColor: subjectScores.map(score => score < 50 ? 'rgb(255, 99, 132)' : 'rgb(75, 192, 192)'),
+          }]
         },
         options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100
             }
+          }
         }
-    });
-</script>
+      });
+    }
+
+    // Call updatePredictions to populate the real-time data when the page loads
+    window.onload = updatePredictions;
+
+  </script>
 
 </body>
 </html>

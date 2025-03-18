@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Performance Prediction</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+    @vite(['resources/css/app.css','resources/js/app.js'])
 
+</head>
 <body class="bg-gray-900 text-white">
     <!-- Navbar -->
     <nav class="flex items-center justify-between p-6">
@@ -22,11 +23,11 @@
     </nav>
 
     <!-- Hero Section and Register -->
-    <header class="flex items-center justify-center h-screen bg-gradient-to-r from-indigo-600 to-purple-700 text-center">
+    <header class="flex items-center justify-center h-screen bg-gradient-to-r from-gray-400 to-black-700 text-center">
         <div>
             <h1 class="text-5xl font-bold mb-4">Predict Your Academic Performance</h1>
             <p class="text-lg mb-6">Get accurate predictions about your academic future based on current performance.</p>
-            <a href="login" class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-6 rounded-full text-xl">
+            <a href="login" class="bg-red-600 hover:bg-red-900 text-white py-2 px-6 rounded-full text-xl">
                 Try It Now
             </a>
         </div>
@@ -64,12 +65,28 @@
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-gray-900 text-center">
-        <h2 class="text-3xl font-semibold mb-6">Get In Touch</h2>
-        <p class="text-lg text-gray-300 mb-6">For any inquiries or feedback, reach out to us.</p>
-        <a href="mailto:info@predictions.com" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-6 rounded-lg text-xl">
-            Email Us
-        </a>
-    </section>
+    <h2 class="text-3xl font-semibold mb-6">Get In Touch</h2>
+    <p class="text-lg text-gray-300 mb-6">For any inquiries or feedback, reach out to us.</p>
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mushyp420@gmail.com" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-6 rounded-lg text-xl mb-4 inline-block">
+        Email Us
+    </a>
+    <br><br>
+    <a href="tel:+255616012915"><p><b>Tel: </b>+255 616 012915</p></a>
+
+    <!-- Add WhatsApp and Instagram Links with Icons -->
+    <div class="mt-6">
+        <!-- WhatsApp Link -->
+       <!-- WhatsApp Link -->
+<a href="https://wa.me/255659435503" class="inline-block mx-4 text-green-500 hover:text-green-700">
+    <img src="images\whatsapp_3536445.png" class="w-10 h-10" alt="WhatsApp">
+</a>
+<!-- Instagram Link -->
+<a href="https://ig.me/m/petramfuture" class="inline-block mx-4 text-pink-600 hover:text-pink-800">
+    <img src="images\instagram.png" class="w-10 h-10" alt="Instagram">
+</a>
+    </div>
+</section>
+
 
     <!-- Footer -->
     <footer class="py-6 bg-gray-800 text-center">

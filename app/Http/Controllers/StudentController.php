@@ -35,17 +35,12 @@ class StudentController extends Controller
     }
     public function getPredictions()
     {
-        // Call Django API for predictions (sending student data or results)
-        $response = Http::post('http://localhost:8000/blog/about', [
-            'student_data' => [/* sample data */]
-        ]);
 
-        $predictions = $response->json();
 
-        return view('predictions', ['predictions' => $predictions]);
+        return view('predictions');
     }
     public function view(){
         return view('view_predictions');
     }
-    
+
 }

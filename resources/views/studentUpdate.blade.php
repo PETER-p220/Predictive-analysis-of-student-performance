@@ -1,5 +1,6 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@vite(['resources/css/app.css','resources/js/app.js'])
 
 <div class="font-[sans-serif] bg-white md:h-screen">
   <div class="grid md:grid-cols-2 items-center gap-8 h-full">

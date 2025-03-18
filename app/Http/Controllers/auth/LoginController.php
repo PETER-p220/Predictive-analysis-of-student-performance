@@ -21,6 +21,10 @@ class LoginController extends Controller
         // Attempt to log the user in with the provided credentials
         if (Auth::attempt($credentials)) {
             // Authentication passed, redirect to the intended page
+            $user = Auth::user();
+            if ($user->role ==='admin') {
+                return redirect()->route('admin');
+            }
             return redirect()->intended('homepage');
         }
 

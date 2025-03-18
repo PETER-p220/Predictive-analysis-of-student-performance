@@ -35,8 +35,24 @@ class RegisterController extends Controller
     // Log the user in after registration
     Auth::login($user);
 
+    if ($user->role==='admin'){
+        return redirect()->route('admin');
+    }
     // Redirect to the homepage
     return redirect()->route('homepage');
+}
+
+public function search(Request $request)
+{
+    $query = $request->input('name');
+
+    if (empty($query)) {
+        return redirect()->route('search')->with('error', 'Please provide a search query');
+    }
+
+    $results = User::search($query)->get();
+
+    return view('search', compact('results', 'query'));
 }
 
     public function editStudent(){
